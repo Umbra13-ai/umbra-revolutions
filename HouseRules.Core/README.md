@@ -40,34 +40,20 @@ seeing a different board view to the host. These inconsistencies are generally s
 
 ## Choosing a Ruleset
 
-Rulesets can be selected dynamically from the in-game menu and default ruleset may be configured via MelonLoader Preferences file.
+Rulesets can be selected dynamically from the in-game menu and a default ruleset may be set in the BepInEx configuration file.
 * A selection of rulesets are built-in, but you can also define your own in JSON.
 * Both built-in and JSON rulesets are displayed on the menu.
 
 ![HouseRules_Menu_Screenshot](../docs/images/houserules_menu_screenshot.jpg)
 
-## MelonLoader Preferences
+## BepInEx configuration
 
-If installation instructions were followed (i.e., MelonLoader was installed),
-the following file will appear in the Demeo game directory:
-`UserData/MelonPreferences.cfg`.
+After HouseRules is installed and Demeo has run once, its settings are in
+`BepInEx/config/com.orendain.demeomods.houserules.configuration.cfg` in the Demeo game directory.
+Demeo should not be running when you edit this file, or your changes may not be saved.
 
-Demeo should not be running when you are editing this file or your changes may not be saved.
-
-After RulesAPI is installed and Demeo is run at least once, the following will
-appear somewhere in that configuration file:
-
-```toml
-[HouseRules]
-defaultRuleset = ""
-loadRulesetsFromConfig = true
-```
-
-A list of out-of-the-box Ruleset names can be found in the
-[HouseRules.Essentials readme](../HouseRules_Essentials/README.md).
-
-The name of a default ruleset can be set in `defaultRuleset` - alternatively, use empty quotes `""` to specify no ruleset should be used.
-The `loadRulesetsFromConfig` flag can be set to `false` to prevent loading of JSON rulesets.
+`DefaultRuleset` names the ruleset selected when the game starts (a built-in name, or the `Name` of a JSON ruleset
+in the `HouseRules` folder). Leave it empty for no ruleset.
 
 ## User-Defined JSON Rulesets
 

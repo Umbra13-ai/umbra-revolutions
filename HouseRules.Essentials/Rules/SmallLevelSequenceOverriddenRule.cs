@@ -58,6 +58,11 @@
             _isActivated = true;
         }
 
+        protected override void OnDeactivate(Context context)
+        {
+            _isActivated = false;
+        }
+
         protected override void OnPreGameCreated(Context context)
         {
             ReplaceExistingProperties(_globalAdjustments, elvenFloors1, forestFloors1, sewersFloors1, elvenFloors2, forestFloors2, sewersFloors2, context.GameContext);

@@ -1,6 +1,5 @@
 ﻿namespace HouseRules.Essentials.Rules
 {
-    using System;
     using System.Collections.Generic;
     using DataKeys;
     using HarmonyLib;
@@ -51,8 +50,9 @@
                 {
                     if (!ability.TryGetComponent(statModifierType, out var statModifier))
                     {
-                        throw new InvalidOperationException(
-                            $"AbilityKey [{replacement.Key}] does not have a corresponding StatModifier.");
+                        HouseRulesEssentialsBase.LogWarning(
+                            $"Skipping maxed-out card setting for {replacement.Key}: no StatModifier found.");
+                        return;
                     }
 
                     originals[replacement.Key] =

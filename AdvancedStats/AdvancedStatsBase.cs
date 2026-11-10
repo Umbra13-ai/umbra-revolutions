@@ -14,7 +14,6 @@ namespace AdvancedStats
 
         internal static void Init(object loader)
         {
-            #if BEPINEX
             if (loader is BepInExPlugin plugin)
             {
                if (plugin.Harmony == null)
@@ -24,14 +23,7 @@ namespace AdvancedStats
 
                _harmony = plugin.Harmony;
             }
-            #endif
 
-            #if MELONLOADER
-            if (loader is MelonLoaderMod mod)
-            {
-                _harmony = mod.HarmonyInstance;
-            }
-            #endif
         }
 
         internal static void OnSceneLoaded(string sceneName)

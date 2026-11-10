@@ -1,4 +1,3 @@
-#if BEPINEX
 namespace AdvancedStats
 {
     using BepInEx;
@@ -23,4 +22,3 @@ namespace AdvancedStats
         }
     }
 }
-#endif

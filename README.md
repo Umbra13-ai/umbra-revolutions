@@ -1,4 +1,42 @@
-![image](https://github.com/TheGrayAlien/DemeoMods/assets/103865052/06ee6335-dccc-43a8-8b3d-3e017aa500a9)
+# Umbra Revolutions
+
+Umbra Revolutions is a fork of Demeo Revolutions, maintained by Umbra. It is the mod set behind the Revolutions rulesets for Demeo: HouseRules (Core, Configuration and Essentials, which together are Revolutions) with RoomCode, RoomFinder, FreeCamera, Highlighter, SkipIntro and AdvancedStats. The plugins are BepInEx 5 plugins. Only the host runs them; guests play the unmodded game.
+
+Tested with the Windows version of Demeo (game version 1.42; its install folder is named `demeorift_release`), played on a Meta Quest 2 connected to the PC, with BepInEx 5.4.22. It has not been tried on other versions or headsets.
+
+**Credit.** This is a fork of [TheGrayAlien/DemeoMods](https://github.com/TheGrayAlien/DemeoMods) (Demeo Revolutions, the rulesets and their rules), which is itself built on [orendain/DemeoMods](https://github.com/orendain/DemeoMods) (HouseRules, by Edgar Orendain). The original authors' work and licence stay in this repository; see `LICENSE`. Changes made in this fork are listed in `CHANGELOG.md` and `docs/CurrentFixes.md`.
+
+Not affiliated with Resolution Games.
+
+## Build
+
+`dotnet build DemeoMods.sln -c Release`. Each plugin lands in `<project>/bin/netstandard2.1/<project>.dll`. The game assemblies the build references are in `libs/` (kept out of Git); the BepInEx packages come from the feed in `NuGet.Config`.
+
+## Install
+
+With Demeo closed, copy the DLLs into `BepInEx/plugins`. Rulesets go in the game's `HouseRules` folder as JSON; `docs/rulesets/` has examples, and the ruleset to start with is set in `BepInEx/config/com.orendain.demeomods.houserules.configuration.cfg`.
+
+## Upgrading from an earlier build
+
+Earlier builds of these plugins came in two versions, one for BepInEx and one for MelonLoader, and the file names carried a suffix to tell them apart: `HouseRules.Core.BIE.dll` for BepInEx, `HouseRules.Core.ML.dll` for MelonLoader, and so on for each plugin.
+
+MelonLoader support has been removed. It had been phased out and no longer works with the current game, so BepInEx is the only loader these plugins support. With one version left, the suffix had no purpose, and the plugins now have plain names:
+
+`HouseRules.Core.dll`, `HouseRules.Configuration.dll`, `HouseRules.Essentials.dll`, `RoomCode.dll`, `RoomFinder.dll`, `FreeCamera.dll`, `Highlighter.dll`, `SkipIntro.dll`, `AdvancedStats.dll`.
+
+**Before you install this build, delete the old plugins.** In `BepInEx/plugins`, remove every file ending in `.BIE.dll`, and any `.ML.dll` left over from MelonLoader. If an old file is left beside its new one, BepInEx loads the plugin twice and the game misbehaves. Your settings are safe: the files in `BepInEx/config` keep their names, and your rulesets in the `HouseRules` folder are untouched.
+
+## Documentation
+
+- `CHANGELOG.md`: what changed in each release.
+- `docs/CurrentFixes.md`: the fixes in this build.
+- `docs/SettingsReference.md`, `docs/PieceConfig.md`, `docs/LevelNames.md`, `docs/LevelProperties.md`: reference for writing rulesets.
+- `docs/rulesets/`: example rulesets.
+- `HouseRules.Core/README.md` and `HouseRules.Essentials/README.md`: the rule system and every rule's settings.
+
+## What Revolutions changes
+
+The original project's description of the rulesets and gameplay changes follows.
 
 Want to make your own rulesets using my rules? Details here: [HouseRules Revolutions Essentials README](https://github.com/TheGrayAlien/DemeoMods/blob/DemeoRevolutions/HouseRules.Essentials/README.md)
 
@@ -176,7 +214,7 @@ You will **NOT** ***start*** with most of the normal [Demeo Revolutions abilitie
 
 
 ### `About the Extra Energy buff given by the Energy Potion`
-When the Energy Potion card is used it will give each character 2 extra maximum health and a NEW ability that they can use 3 times total that will not cost any action points when used. There is no turn limit to the buff. The character using the Energy Potion will not get the ability until their NEXT turn. The buff counter will update at the start of your turn to let you know how many more charges are left. If you use all 3 charges then at the end of that turn you will lose the extra 2 maximum health and gain a Thorns debuff for 2 rounds. Energy Potion card buffs **DO NOT** stack!
+When the Energy Potion card is used it will give each character 2 extra maximum health and a NEW ability immediately that they can use 3 times total that will not cost any action points when used. There is no turn limit to the buff. The buff counter will update at the start of your turn to let you know how many more charges are left. If you use all 3 charges then at the end of that turn you will lose the extra 2 maximum health and gain a Thorns debuff for 2 rounds. Energy Potion card buffs **DO NOT** stack!
 
 **`Guardian:`**
 - ***Leap*** - Jumps a moderate distance. Landing causes 5 damage to each enemy within a 3x3 area.

@@ -1,4 +1,3 @@
-#if BEPINEX
 namespace FreeCamera
 {
     using BepInEx;
@@ -20,4 +19,3 @@ namespace FreeCamera
         }
     }
 }
-#endif

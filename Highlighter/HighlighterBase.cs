@@ -1,4 +1,4 @@
-﻿namespace Highlighter
+namespace Highlighter
 {
     internal static class HighlighterBase
     {
@@ -9,7 +9,6 @@
 
         internal static void Init(object loader)
         {
-            #if BEPINEX
             if (loader is BepInExPlugin plugin)
             {
                 if (plugin.Harmony == null)
@@ -19,14 +18,7 @@
 
                 MoveHighlighter.Patch(plugin.Harmony);
             }
-            #endif
 
-            #if MELONLOADER
-            if (loader is MelonLoaderMod mod)
-            {
-                MoveHighlighter.Patch(mod.HarmonyInstance);
-            }
-            #endif
         }
     }
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## November 2026 (Umbra's fork)
+
+**BepInEx only; plain file name.** MelonLoader support has been removed: it had been phased out and no longer works with the current game. With one loader left, the file-name suffix that told the two versions apart has gone too, so the plugin is now `RoomCode.dll` rather than `RoomCode.BIE.dll`.
+
+**Before installing, delete the old file.** Remove `RoomCode.BIE.dll` (and any `RoomCode.ML.dll`) from `BepInEx/plugins`. If it stays beside the new file, BepInEx loads the plugin twice. Settings in `BepInEx/config` keep their names and are not affected.
+
 ## [v1.1.0-roomcode](https://github.com/orendain/demeomods/tree/v1.1.0-roomcode) (2022-04-11)
 
 [Full Changelog](https://github.com/orendain/demeomods/compare/v1.0.0-roomcode...v1.1.0-roomcode)

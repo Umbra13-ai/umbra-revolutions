@@ -44,8 +44,13 @@
                 var abilityPromise = context.AbilityFactory.LoadAbility(replacement.Key);
                 abilityPromise.OnLoaded(ability =>
                 {
-                    originals[replacement.Key] =
-                        new List<int> { ability.abilityDamage.targetDamage, ability.abilityDamage.critDamage };
+                    originals[replacement.Key] = new List<int>
+                    {
+                        ability.abilityDamage.targetDamage,
+                        ability.abilityDamage.critDamage,
+                        ability.abilityDamage.splashDamage,
+                        ability.abilityDamage.critSplashDamage,
+                    };
                     ability.abilityDamage.targetDamage = replacement.Value[0];
                     ability.abilityDamage.critDamage = replacement.Value[1];
                     ability.abilityDamage.splashDamage = replacement.Value[2];

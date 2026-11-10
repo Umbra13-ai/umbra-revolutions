@@ -1,4 +1,4 @@
-﻿namespace RoomCode
+namespace RoomCode
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@
     {
         internal const string ModId = "com.orendain.demeomods.roomcode";
         internal const string ModName = "RoomCode";
-        internal const string ModVersion = "1.3.0";
+        internal const string ModVersion = "1.3.1";
         internal const string ModAuthor = "DemeoMods Team";
 
         private static Action<object>? _logInfo;
@@ -26,7 +26,6 @@
 
         internal static void Init(object loader)
         {
-            #if BEPINEX
             if (loader is BepInExPlugin plugin)
             {
                 if (plugin.Log == null)
@@ -49,21 +48,7 @@
 
                 ModPatcher.Patch(plugin.Harmony);
             }
-            #endif
 
-            #if MELONLOADER
-            if (loader is MelonLoaderMod mod)
-            {
-                _logInfo = mod.LoggerInstance.Msg;
-                _logDebug = mod.LoggerInstance.Msg;
-                _logError = mod.LoggerInstance.Error;
-
-                Enabled = mod.Enabled.Value;
-                RoomCodes = mod.RoomCodes.Value;
-
-                ModPatcher.Patch(mod.HarmonyInstance);
-            }
-            #endif
         }
     }
 }

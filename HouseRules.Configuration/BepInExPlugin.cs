@@ -1,4 +1,3 @@
-#if BEPINEX
 namespace HouseRules.Configuration
 {
     using System;
@@ -76,4 +75,3 @@ namespace HouseRules.Configuration
         }
     }
 }
-#endif

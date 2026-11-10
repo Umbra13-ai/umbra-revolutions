@@ -70,6 +70,11 @@ namespace HouseRules.Essentials.Rules
             _isActivated = true;
         }
 
+        protected override void OnDeactivate(Context context)
+        {
+            _isActivated = false;
+        }
+
         protected override void OnPreGameCreated(Context context)
         {
             ReplaceExistingProperties(_globalAdjustments, elvenFloors1, forestFloors1, sewersFloors1, desertFloors1, townsFloors1, elvenFloors2, forestFloors2, sewersFloors2, desertFloors2, townsFloors2, context.GameContext);

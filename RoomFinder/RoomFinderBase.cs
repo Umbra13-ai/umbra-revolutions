@@ -1,4 +1,4 @@
-﻿namespace RoomFinder
+namespace RoomFinder
 {
     using System;
     using HarmonyLib;
@@ -34,7 +34,6 @@
 
         internal static void Init(object loader)
         {
-#if BEPINEX
             if (loader is BepInExPlugin plugin)
             {
                 if (plugin.Log == null)
@@ -55,19 +54,6 @@
 
                 _harmony = plugin.Harmony;
             }
-#endif
-
-#if MELONLOADER
-            if (loader is MelonLoaderMod mod)
-            {
-                _logInfo = mod.LoggerInstance.Msg;
-                _logDebug = mod.LoggerInstance.Msg;
-                _logWarning = mod.LoggerInstance.Warning;
-                _logError = mod.LoggerInstance.Error;
-
-                _harmony = mod.HarmonyInstance;
-            }
-#endif
 
             RoomManager.Patch(_harmony);
         }

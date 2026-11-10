@@ -1,4 +1,4 @@
-﻿namespace FreeCamera
+namespace FreeCamera
 {
     using System;
     using HarmonyLib;
@@ -18,7 +18,6 @@
 
         internal static void Init(object loader)
         {
-            #if BEPINEX
             if (loader is BepInExPlugin plugin)
             {
                 if (plugin.Log == null)
@@ -36,15 +35,6 @@
 
                 _harmony = plugin.Harmony;
             }
-            #endif
-
-            #if MELONLOADER
-            if (loader is MelonLoaderMod mod)
-            {
-                _logError = mod.LoggerInstance.Error;
-                _harmony = mod.HarmonyInstance;
-            }
-            #endif
 
             NonVrMouseSupporter.Patch(_harmony);
         }

@@ -1,4 +1,3 @@
-#if BEPINEX
 namespace HouseRules.Core
 {
     using BepInEx;
@@ -25,4 +24,3 @@ namespace HouseRules.Core
         }
     }
 }
-#endif

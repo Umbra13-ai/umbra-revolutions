@@ -1,20 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
-        <Configurations>BepInEx;MelonLoader</Configurations>
         <AssemblySearchPaths>../libs;$(AssemblySearchPaths)</AssemblySearchPaths>
     </PropertyGroup>
 
-    <!-- BepInEx 5.x build config -->
-    <PropertyGroup Condition="'$(Configuration)'=='BepInEx'">
+    <!-- BepInEx 5.x plugin -->
+    <PropertyGroup>
         <OutputPath>bin</OutputPath>
-        <DefineConstants>BEPINEX</DefineConstants>
-        <AssemblyName>HouseRules.Configuration.BIE</AssemblyName>
+        <AssemblyName>HouseRules.Configuration</AssemblyName>
     </PropertyGroup>
-    <ItemGroup Condition="'$(Configuration)'=='BepInEx'">
+    <ItemGroup>
         <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
         <PackageReference Include="BepInEx.Core" Version="5.*"/>
         <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*"/>
@@ -23,13 +21,13 @@
         <PackageReference Include="Fody" Version="6.8.0" />
         <PackageReference Include="Costura.Fody" Version="5.7.0" PrivateAssets="all" />
 	</ItemGroup>
-    <ItemGroup Condition="'$(Configuration)'=='BepInEx'">
+    <ItemGroup>
         <ProjectReference Include="..\Common.UI\Common.UI.csproj"/>
         <ProjectReference Include="..\HouseRules.Core\HouseRules.Core.csproj">
             <Private>false</Private>
         </ProjectReference>
     </ItemGroup>
-    <ItemGroup Condition="'$(Configuration)'=='BepInEx'">
+    <ItemGroup>
         <Reference Include="Assembly-CSharp">
             <Private>false</Private>
         </Reference>
@@ -41,43 +39,6 @@
         </Reference>
         <Reference Include="Unity.TextMeshPro">
             <Private>false</Private>
-        </Reference>
-    </ItemGroup>
-
-    <!-- MelonLoader 0.5.7 build config -->
-    <PropertyGroup Condition="'$(Configuration)'=='MelonLoader'">
-        <OutputPath>bin</OutputPath>
-        <DefineConstants>MELONLOADER</DefineConstants>
-        <AssemblyName>HouseRules.Configuration.ML</AssemblyName>
-    </PropertyGroup>
-    <ItemGroup Condition="'$(Configuration)'=='MelonLoader'">
-        <PackageReference Include="HarmonyX" Version="2.10.1" IncludeAssets="compile"/>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.2"/>
-        <PackageReference Include="UnityEngine.Modules" Version="2021.3.27" IncludeAssets="compile"/>
-		<PackageReference Include="Fody" Version="6.8.0" />
-        <PackageReference Include="Costura.Fody" Version="5.7.0" PrivateAssets="all" />
-    </ItemGroup>
-    <ItemGroup Condition="'$(Configuration)'=='MelonLoader'">
-        <ProjectReference Include="..\Common.UI\Common.UI.csproj"/>
-        <ProjectReference Include="..\HouseRules.Core\HouseRules.Core.csproj">
-            <Private>false</Private>
-        </ProjectReference>
-    </ItemGroup>
-    <ItemGroup Condition="'$(Configuration)'=='MelonLoader'">
-        <Reference Include="Assembly-CSharp">
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="BowserCore">
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="UnityEngine.UI">
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="Unity.TextMeshPro">
-            <Private>false</Private>
-        </Reference>
-        <Reference Include="MelonLoader">
-            <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Demeo\MelonLoader\MelonLoader.dll</HintPath>
         </Reference>
     </ItemGroup>
 

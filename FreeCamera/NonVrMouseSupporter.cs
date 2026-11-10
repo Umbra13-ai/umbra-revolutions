@@ -63,18 +63,18 @@
             var enableRotateFocusCameraMouseAction = Traverse.Create(__instance).
                 Field<InputAction>("enableRotateFocusCameraMouseAction").
                 Value;
-            var isRotatingCameraTraverse = Traverse.Create(__instance).Field<bool>("isRotatingCamera");
+            var enableMoveFocusCameraMouseAction = Traverse.Create(__instance).
+                Field<InputAction>("enableMoveFocusCameraMouseAction").
+                Value;
 
             enableRotateFocusCameraMouseAction.performed += _ =>
             {
                 ShowCursor(false);
                 _tiltMouseAction.Enable();
-                isRotatingCameraTraverse.Value = true;
             };
 
             enableRotateFocusCameraMouseAction.canceled += _ =>
             {
-                isRotatingCameraTraverse.Value = false;
                 ShowCursor(ShouldShowCursor());
                 _tiltMouseAction.Disable();
             };
@@ -84,15 +84,8 @@
 
             bool ShouldShowCursor()
             {
-                var isPanningCamera = Traverse.Create(__instance).
-                    Field<bool>("isPanningCamera").
-                    Value;
-                if (!isPanningCamera)
-                {
-                    return !isRotatingCameraTraverse.Value;
-                }
-
-                return false;
+                return !enableMoveFocusCameraMouseAction.IsPressed()
+                       && !enableRotateFocusCameraMouseAction.IsPressed();
             }
 
             static void ShowCursor(bool show)

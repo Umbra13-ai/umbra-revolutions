@@ -1,4 +1,3 @@
-#if BEPINEX
 namespace RoomFinder
 {
     using BepInEx;
@@ -27,4 +26,3 @@ namespace RoomFinder
         }
     }
 }
-#endif

@@ -15,7 +15,6 @@ namespace SkipIntro
 
         internal static void Init(object loader)
         {
-            #if BEPINEX
             if (loader is BepInExPlugin plugin)
             {
                 if (plugin.Log == null)
@@ -25,14 +24,7 @@ namespace SkipIntro
 
                 _logDebug = plugin.Log.LogDebug;
             }
-            #endif
 
-            #if MELONLOADER
-            if (loader is MelonLoaderMod mod)
-            {
-                _logDebug = mod.LoggerInstance.Msg;
-            }
-            #endif
         }
     }
 }

@@ -1,4 +1,3 @@
-#if BEPINEX
 namespace RoomCode
 {
     using System;
@@ -49,4 +48,3 @@ namespace RoomCode
         }
     }
 }
-#endif

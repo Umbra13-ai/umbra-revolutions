@@ -1,4 +1,3 @@
-#if BEPINEX
 namespace Highlighter
 {
     using BepInEx;
@@ -16,4 +15,3 @@ namespace Highlighter
         }
     }
 }
-#endif

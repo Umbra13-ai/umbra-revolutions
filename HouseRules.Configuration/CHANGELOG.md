@@ -1,5 +1,11 @@
 # Changelog
 
+## November 2026 (Umbra's fork)
+
+**BepInEx only; plain file name.** MelonLoader support has been removed: it had been phased out and no longer works with the current game. With one loader left, the file-name suffix that told the two versions apart has gone too, so the plugin is now `HouseRules.Configuration.dll` rather than `HouseRules.Configuration.BIE.dll`.
+
+**Before installing, delete the old file.** Remove `HouseRules.Configuration.BIE.dll` (and any `HouseRules.Configuration.ML.dll`) from `BepInEx/plugins`. If it stays beside the new file, BepInEx loads the plugin twice. Settings in `BepInEx/config` keep their names and are not affected.
+
 ## [v1.6.0-houserules](https://github.com/orendain/DemeoMods/tree/v1.6.0-houserules) (2022-12-19)
 
 [Full Changelog](https://github.com/orendain/DemeoMods/compare/v1.5.0-houserules...v1.6.0-houserules)

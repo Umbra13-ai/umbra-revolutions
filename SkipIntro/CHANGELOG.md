@@ -1,5 +1,11 @@
 # Changelog
 
+## November 2026 (Umbra's fork)
+
+**BepInEx only; plain file name.** MelonLoader support has been removed: it had been phased out and no longer works with the current game. With one loader left, the file-name suffix that told the two versions apart has gone too, so the plugin is now `SkipIntro.dll` rather than `SkipIntro.BIE.dll`.
+
+**Before installing, delete the old file.** Remove `SkipIntro.BIE.dll` (and any `SkipIntro.ML.dll`) from `BepInEx/plugins`. If it stays beside the new file, BepInEx loads the plugin twice. Settings in `BepInEx/config` keep their names and are not affected.
+
 ## [v1.4.0-skipintro](https://github.com/orendain/demeomods/tree/v1.4.0-skipintro) (2022-04-11)
 
 [Full Changelog](https://github.com/orendain/demeomods/compare/v1.3.0-skipintro...v1.4.0-skipintro)

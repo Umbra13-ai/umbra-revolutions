@@ -44,28 +44,35 @@
 
         protected override void OnDeactivate(Context context)
         {
-            ReplaceExistingProperties(_originals);
+            // Undo in reverse so a property adjusted more than once ends at its true original value.
+            var toRestore = new List<PieceProperty>(_originals);
+            toRestore.Reverse();
+            ReplaceExistingProperties(toRestore, restoring: true);
         }
 
         /// <summary>
         /// Replaces existing PieceConfig properties with those specified.
         /// </summary>
         /// <returns>Previous properties that are now replaced.</returns>
-        private static List<PieceProperty> ReplaceExistingProperties(List<PieceProperty> pieceConfigChanges)
+        private static List<PieceProperty> ReplaceExistingProperties(List<PieceProperty> pieceConfigChanges, bool restoring = false)
         {
             var gameContext = Traverse.Create(typeof(GameHub)).Field<GameContext>("gameContext").Value;
             var previousProperties = new List<PieceProperty>();
             foreach (var item in pieceConfigChanges)
             {
                 var pieceConfig = gameContext.gameDataAPI.PieceConfig[MotherbrainGlobalVars.CurrentConfig][item.Piece];
-                if (item.Property == "PreciseHealth")
+                if (item.Property == "PreciseHealth" || item.Property == "PreciseAttack")
                 {
-                    AccessTools.FieldRefAccess<PieceConfigData, int>(pieceConfig, "healthAutoBalanceMode") = 1; // DownOnly
-                    continue;
-                }
-                else if (item.Property == "PreciseAttack")
-                {
-                    AccessTools.FieldRefAccess<PieceConfigData, int>(pieceConfig, "attackDamageAutoBalanceMode") = 1; // None
+                    // The auto-balance mode is changed on the shared config, so the original mode is recorded
+                    // (as the value) and put back when the rule deactivates.
+                    var modeField = item.Property == "PreciseHealth" ? "healthAutoBalanceMode" : "attackDamageAutoBalanceMode";
+                    previousProperties.Add(new PieceProperty
+                    {
+                        Piece = item.Piece,
+                        Property = item.Property,
+                        Value = AccessTools.FieldRefAccess<PieceConfigData, int>(pieceConfig, modeField),
+                    });
+                    AccessTools.FieldRefAccess<PieceConfigData, int>(pieceConfig, modeField) = restoring ? (int)item.Value : 1;
                     continue;
                 }
                 else

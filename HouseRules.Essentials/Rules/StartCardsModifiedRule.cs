@@ -39,6 +39,7 @@
             _context = context;
             _globalHeroStartCards = _heroStartCards;
             _isActivated = true;
+            RevolutionsCardArt.EnsureRegistered();
         }
 
         protected override void OnDeactivate(Context context)

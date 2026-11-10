@@ -27,6 +27,7 @@
         {
             _globalGameType = _gameType;
             _isActivated = true;
+            RevolutionsCardArt.EnsureRegistered();
         }
 
         protected override void OnDeactivate(Context context)
@@ -53,6 +54,73 @@
                 prefix: new HarmonyMethod(
                     typeof(RevolutionsRule),
                     nameof(StatsusEffect_Tick_Prefix)));
+            harmony.Patch(
+                original: AccessTools.Method(typeof(EffectSink), "AddStatusEffect"),
+                postfix: new HarmonyMethod(
+                    typeof(RevolutionsRule),
+                    nameof(EffectSink_AddStatusEffect_Postfix)));
+        }
+
+        private static void EffectSink_AddStatusEffect_Postfix(EffectSink __instance, EffectStateType effectStateType)
+        {
+            if (!_isActivated || !GameStateMachine.IsMasterClient || effectStateType != EffectStateType.ExtraEnergy)
+            {
+                return;
+            }
+
+            var ownerId = Traverse.Create(__instance).Field<int>("ownerPieceId").Value;
+            var turnController = Traverse.Create(typeof(StatusEffect)).Field<PieceAndTurnController>("pieceAndTurnController").Value;
+            if (turnController == null || !turnController.TryGetPiece(ownerId, out var piece) ||
+                !piece.IsPlayer() || !piece.HasEffectState(EffectStateType.ExtraEnergy))
+            {
+                return;
+            }
+
+            var mode = piece.GetStat(Stats.Type.InnateCounterDamageExtraDamage);
+            if (mode < 1 || mode > 8)
+            {
+                return;
+            }
+
+            AbilityKey abilityKey;
+            switch (piece.boardPieceId)
+            {
+                case BoardPieceId.HeroBarbarian: abilityKey = AbilityKey.ImplosionExplosionRain; break;
+                case BoardPieceId.HeroGuardian: abilityKey = AbilityKey.LeapHeavy; break;
+                case BoardPieceId.HeroHunter: abilityKey = AbilityKey.PVPMissileSwarm; break;
+                case BoardPieceId.HeroBard: abilityKey = AbilityKey.PVPBlink; break;
+                case BoardPieceId.HeroSorcerer: abilityKey = AbilityKey.DeathBeam; break;
+                case BoardPieceId.HeroRogue: abilityKey = AbilityKey.PVPFireball; break;
+                case BoardPieceId.HeroWarlock: abilityKey = AbilityKey.WeakeningShout; break;
+                default: return;
+            }
+
+            if (piece.inventory.HasAbility(abilityKey))
+            {
+                return;
+            }
+
+            if (piece.boardPieceId == BoardPieceId.HeroHunter)
+            {
+                for (var i = piece.inventory.Items.Count - 1; i >= 0; i--)
+                {
+                    if (piece.inventory.Items[i].AbilityKey == AbilityKey.Zap)
+                    {
+                        piece.inventory.Items.RemoveAt(i);
+                        Traverse.Create(piece.inventory).Field<int>("numberOfReplenishableCards").Value -= 1;
+                    }
+                }
+            }
+
+            Traverse.Create(piece.inventory).Field<int>("numberOfReplenishableCards").Value += 1;
+            piece.inventory.Items.Add(new Inventory.Item(
+                abilityKey,
+                flags: (Inventory.ItemFlag)1,
+                originalOwner: -1,
+                replenishCooldown: 1));
+            HouseRulesEssentialsBase.LogDebug($"Energy Potion immediately granted {abilityKey} to {piece.boardPieceId}.");
+            HR.ScheduleBoardSync();
+            piece.AddGold(0);
         }
 
         private static void StatsusEffect_Tick_Prefix(ref StatusEffect __instance)
@@ -751,6 +819,7 @@
                                 Traverse.Create(piece.inventory).Field<int>("numberOfReplenishableCards").Value -= 1;
                                 piece.inventory.Items.Remove(value);
                                 piece.AddGold(0);
+                                i--;
                             }
                         }
                     }

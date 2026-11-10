@@ -39,6 +39,11 @@
             _isActivated = true;
         }
 
+        protected override void OnDeactivate(Context context)
+        {
+            _isActivated = false;
+        }
+
         protected override void OnPreGameCreated(Context context)
         {
             ReplaceExistingProperties(_globalAdjustments, context.GameContext);
