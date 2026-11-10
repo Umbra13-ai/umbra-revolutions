@@ -1,5 +1,7 @@
 # Umbra Revolutions
 
+![Umbra Revolutions](docs/images/umbra-revolutions-banner.jpg)
+
 Umbra Revolutions is a fork of Demeo Revolutions, maintained by Umbra. It is the mod set behind the Revolutions rulesets for Demeo: HouseRules (Core, Configuration and Essentials, which together are Revolutions) with RoomCode, RoomFinder, FreeCamera, Highlighter, SkipIntro and AdvancedStats. The plugins are BepInEx 5 plugins. Only the host runs them; guests play the unmodded game.
 
 Tested with the Windows version of Demeo (game version 1.42; its install folder is named `demeorift_release`), played on a Meta Quest 2 connected to the PC, with BepInEx 5.4.22. It has not been tried on other versions or headsets.
