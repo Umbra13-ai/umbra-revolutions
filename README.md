@@ -6,7 +6,7 @@ Umbra Revolutions is a fork of Demeo Revolutions, maintained by Umbra. It is the
 
 Tested with the Windows version of Demeo (game version 1.42; its install folder is named `demeorift_release`), played on a Meta Quest 2 connected to the PC, with BepInEx 5.4.22. It has not been tried on other versions or headsets.
 
-**Credit.** This is a fork of [TheGrayAlien/DemeoMods](https://github.com/TheGrayAlien/DemeoMods) (Demeo Revolutions, the rulesets and their rules), which is itself built on [orendain/DemeoMods](https://github.com/orendain/DemeoMods) (HouseRules, by Edgar Orendain). The original authors' work and licence stay in this repository; see `LICENSE`. Changes made in this fork are listed in `CHANGELOG.md` and `docs/CurrentFixes.md`.
+**Credit.** This is a fork of [TheGrayAlien/DemeoMods](https://github.com/TheGrayAlien/DemeoMods) (Demeo Revolutions, the rulesets and their rules), which is itself built on [orendain/DemeoMods](https://github.com/orendain/DemeoMods) (HouseRules, by Edgar Orendain). The original authors' work and license stay in this repository; see `LICENSE`. Changes made in this fork are listed in `CHANGELOG.md` and `docs/CurrentFixes.md`.
 
 Not affiliated with Resolution Games.
 
