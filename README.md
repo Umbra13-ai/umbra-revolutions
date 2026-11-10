@@ -16,7 +16,11 @@ Not affiliated with Resolution Games.
 
 ## Install
 
-With Demeo closed, copy the DLLs into `BepInEx/plugins`. Rulesets go in the game's `HouseRules` folder as JSON; `docs/rulesets/` has examples, and the ruleset to start with is set in `BepInEx/config/com.orendain.demeomods.houserules.configuration.cfg`.
+Download the zip from the [latest release](https://github.com/Umbra13-ai/umbra-revolutions/releases/latest). With Demeo closed, extract the contents of the zip into the game's root folder, the folder that already contains `BepInEx`, and let it merge with the folders that are there. The zip's folders put the plugins in `BepInEx\plugins`, default settings in `BepInEx\config` and example rulesets in `HouseRules\ExampleRulesets`. Only the host needs the plugins; guests play the unmodded game.
+
+To pick which ruleset starts by default, set `DefaultRuleset` in `BepInEx\config\com.orendain.demeomods.houserules.configuration.cfg`. Your own rulesets go in the game's `HouseRules` folder as JSON; the example rulesets are a good starting point.
+
+**If you have changed your settings** (for example your room codes in `com.orendain.demeomods.roomcode.cfg`), keep a copy of your config files first or skip them when extracting, because the zip includes default versions.
 
 ## Upgrading from an earlier build
 
